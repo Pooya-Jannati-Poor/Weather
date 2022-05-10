@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/cityFinderFragment">
+
+    <fragment
+        android:id="@+id/cityFinderFragment"
+        android:name="ir.arinateam.weather.view.CityFinderFragment"
+        android:label="CityFinderFragment"
+        tools:layout="@layout/city_finder_fragment">
+        <action
+            android:id="@+id/action_cityFinderFragment_to_weatherDetailFragment"
+            app:destination="@id/weatherDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherDetailFragment"
+        android:name="ir.arinateam.weather.view.WeatherDetailFragment"
+        android:label="weather_detail_fragment"
+        tools:layout="@layout/weather_detail_fragment" />
+</navigation>
