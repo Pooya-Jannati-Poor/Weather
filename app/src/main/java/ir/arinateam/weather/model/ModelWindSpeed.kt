@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ModelWindSpeed(
 
     @SerializedName("Value")
-    val speedValue: Int,
+    val speedValue: Float,
 
     @SerializedName("Unit")
     val unit: String

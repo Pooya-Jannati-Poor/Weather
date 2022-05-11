@@ -1,6 +1,7 @@
 package ir.arinateam.weather.api
 
 import io.reactivex.rxjava3.core.Single
+import ir.arinateam.weather.model.ModelGetCurrentCondition
 import ir.arinateam.weather.model.ModelGetOneDayForecast
 import ir.arinateam.weather.model.ModelRecCityName
 import retrofit2.http.*
@@ -19,5 +20,12 @@ interface ApiInterface {
         @Path("cityId") cityId: Int,
         @Query("details") details: Boolean = true
     ): Single<ModelGetOneDayForecast>
+
+    @GET("currentconditions/v1/{cityId}")
+    fun getCurrentCondition(
+        @Query("apikey") apikey: String = "JrXcR2XrjVJV6SYbel6qGbyyQaW43MY2",
+        @Path("cityId") cityId: Int,
+        @Query("details") details: Boolean = true
+    ): Single<ArrayList<ModelGetCurrentCondition>>
 
 }

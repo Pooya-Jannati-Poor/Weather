@@ -26,7 +26,7 @@ class ViewModelCityFinderFragment(application: Application) : AndroidViewModel(a
 
     fun sendCitySearchApi(context: Context, cityName: String) {
 
-        apiClient = ApiClient(context)
+        apiClient = ApiClient()
 
         loading = LoadingAnimation(context)
 

@@ -4,6 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 data class ModelDayNight(
 
+    @SerializedName("Icon")
+    val icon: Int,
+
+    @SerializedName("IconPhrase")
+    val iconPhrase: String,
+
     @SerializedName("ShortPhrase")
     val shortPhrase: String,
 
@@ -29,7 +35,7 @@ data class ModelDayNight(
     val windGust: ModelWindGust,
 
     @SerializedName("CloudCover")
-    val cloudCover: Int,
+    val cloudCover: Int
 
 
 

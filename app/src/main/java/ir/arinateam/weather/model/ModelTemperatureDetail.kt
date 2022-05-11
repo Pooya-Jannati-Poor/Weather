@@ -8,6 +8,9 @@ data class ModelTemperatureDetail(
     val value: Int,
 
     @SerializedName("Unit")
-    val unit: String
+    val unit: String,
+
+    @SerializedName("UnitType")
+    val valueIcon: Int,
 
 )

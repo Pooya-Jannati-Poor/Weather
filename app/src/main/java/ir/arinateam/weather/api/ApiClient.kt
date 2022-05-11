@@ -1,16 +1,15 @@
 package ir.arinateam.weather.api
 
-
-import android.content.Context
 import com.google.gson.GsonBuilder
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import io.reactivex.rxjava3.core.Single
+import ir.arinateam.weather.model.ModelGetCurrentCondition
 import ir.arinateam.weather.model.ModelGetOneDayForecast
 import ir.arinateam.weather.model.ModelRecCityName
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiClient(context: Context) {
+class ApiClient {
 
     private val baseUrl = "http://dataservice.accuweather.com/"
 
@@ -40,11 +39,15 @@ class ApiClient(context: Context) {
     fun getCitiesName(
         cityName: String
     ): Single<ArrayList<ModelRecCityName>> {
-        return request.getCitiesName("JrXcR2XrjVJV6SYbel6qGbyyQaW43MY2", cityName)
+        return request.getCitiesName(cityName = cityName)
     }
 
     fun getOneDayForecast(cityId: Int): Single<ModelGetOneDayForecast> {
-        return request.getOneDayForecast("JrXcR2XrjVJV6SYbel6qGbyyQaW43MY2", cityId, true)
+        return request.getOneDayForecast(cityId = cityId)
+    }
+
+    fun getCurrentCondition(cityId: Int): Single<ArrayList<ModelGetCurrentCondition>> {
+        return request.getCurrentCondition(cityId = cityId)
     }
 
 }
