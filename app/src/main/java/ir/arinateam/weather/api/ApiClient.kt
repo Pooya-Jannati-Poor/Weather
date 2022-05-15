@@ -4,7 +4,7 @@ import com.google.gson.GsonBuilder
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import io.reactivex.rxjava3.core.Single
 import ir.arinateam.weather.model.ModelGetCurrentCondition
-import ir.arinateam.weather.model.ModelGetOneDayForecast
+import ir.arinateam.weather.model.ModelGetFutureDayForecast
 import ir.arinateam.weather.model.ModelRecCityName
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -42,12 +42,12 @@ class ApiClient {
         return request.getCitiesName(cityName = cityName)
     }
 
-    fun getOneDayForecast(cityId: Int): Single<ModelGetOneDayForecast> {
-        return request.getOneDayForecast(cityId = cityId)
-    }
-
     fun getCurrentCondition(cityId: Int): Single<ArrayList<ModelGetCurrentCondition>> {
         return request.getCurrentCondition(cityId = cityId)
+    }
+
+    fun getFiveDayForecast(cityId: Int): Single<ModelGetFutureDayForecast> {
+        return request.getFiveDayForecast(cityId = cityId)
     }
 
 }

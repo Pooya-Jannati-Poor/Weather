@@ -2,46 +2,45 @@ package ir.arinateam.weather.viewmodel
 
 import android.app.Application
 import android.content.Context
-import android.os.Build
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ir.arinateam.weather.api.ApiClient
-import ir.arinateam.weather.model.ModelRecCityName
+import ir.arinateam.weather.model.ModelGetCurrentCondition
+import ir.arinateam.weather.model.ModelGetFutureDayForecast
 import ir.arinateam.weather.utils.LoadingAnimation
 
-class ViewModelCityFinderFragment(application: Application) : AndroidViewModel(application) {
+class ViewModelWeatherDetailFragment(application: Application) : AndroidViewModel(application) {
 
     private lateinit var loading: LoadingAnimation
 
     private lateinit var apiClient: ApiClient
-    private val citySearchApiDisposable: CompositeDisposable = CompositeDisposable()
-    val citySearchApiResult: MutableLiveData<Boolean> = MutableLiveData()
-    val lsModelRecCityNameObserver: MutableLiveData<ArrayList<ModelRecCityName>> = MutableLiveData()
+    private val currentConditionApiDisposable: CompositeDisposable = CompositeDisposable()
+    val lsModelGetCurrentConditionObserver: MutableLiveData<ArrayList<ModelGetCurrentCondition>> =
+        MutableLiveData()
 
-    fun sendCitySearchApi(context: Context, cityName: String) {
+    fun sendCurrentConditionApi(context: Context, cityId: Int) {
 
         apiClient = ApiClient()
 
         loading = LoadingAnimation(context)
 
-        citySearchApiDisposable.add(
-            apiClient.getCitiesName(cityName)
+        currentConditionApiDisposable.add(
+            apiClient.getCurrentCondition(cityId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<ArrayList<ModelRecCityName>>() {
-                    override fun onSuccess(t: ArrayList<ModelRecCityName>) {
+                .subscribeWith(object :
+                    DisposableSingleObserver<ArrayList<ModelGetCurrentCondition>>() {
+                    override fun onSuccess(t: ArrayList<ModelGetCurrentCondition>) {
 
                         loading.hideDialog()
 
-                        lsModelRecCityNameObserver.postValue(t)
+                        lsModelGetCurrentConditionObserver.postValue(t)
 
-                        citySearchApiResult.postValue(true)
+                        currentConditionApiDisposable.clear()
 
                     }
 
@@ -51,7 +50,7 @@ class ViewModelCityFinderFragment(application: Application) : AndroidViewModel(a
 
                         e.printStackTrace()
 
-                        citySearchApiResult.postValue(false)
+                        currentConditionApiDisposable.clear()
 
                     }
 
@@ -62,7 +61,7 @@ class ViewModelCityFinderFragment(application: Application) : AndroidViewModel(a
     }
 
     override fun onCleared() {
-        citySearchApiDisposable.clear()
+        currentConditionApiDisposable.clear()
         super.onCleared()
     }
 

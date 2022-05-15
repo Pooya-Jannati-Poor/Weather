@@ -2,7 +2,7 @@ package ir.arinateam.weather.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ModelGetOneDayForecast(
+data class ModelGetFutureDayForecast(
 
     @SerializedName("Headline")
     val headline: ModelHeadline,

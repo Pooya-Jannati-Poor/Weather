@@ -18,5 +18,14 @@
         android:id="@+id/weatherDetailFragment"
         android:name="ir.arinateam.weather.view.WeatherDetailFragment"
         android:label="weather_detail_fragment"
-        tools:layout="@layout/weather_detail_fragment" />
+        tools:layout="@layout/weather_detail_fragment" >
+        <action
+            android:id="@+id/action_weatherDetailFragment_to_fiveDayForecastFragment"
+            app:destination="@id/fiveDayForecastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fiveDayForecastFragment"
+        android:name="ir.arinateam.weather.view.FiveDayForecastFragment"
+        android:label="FiveDayForecastFragment"
+        tools:layout="@layout/five_day_forecast_fragment"/>
 </navigation>

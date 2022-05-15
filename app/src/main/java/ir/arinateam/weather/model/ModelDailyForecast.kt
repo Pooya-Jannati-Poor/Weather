@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ModelDailyForecast(
 
+    @SerializedName("Date")
+    val forecastDate: String,
+
     @SerializedName("Sun")
     val sunDetail: ModelSunDetail,
 

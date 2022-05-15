@@ -7,7 +7,7 @@ data class ModelGetCurrentCondition(
     @SerializedName("LocalObservationDateTime")
     val localObservationDateTime: String,
 
-    @SerializedName("")
+    @SerializedName("WeatherText")
     val weatherText: String,
 
     @SerializedName("WeatherIcon")

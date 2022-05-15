@@ -2,7 +2,7 @@ package ir.arinateam.weather.api
 
 import io.reactivex.rxjava3.core.Single
 import ir.arinateam.weather.model.ModelGetCurrentCondition
-import ir.arinateam.weather.model.ModelGetOneDayForecast
+import ir.arinateam.weather.model.ModelGetFutureDayForecast
 import ir.arinateam.weather.model.ModelRecCityName
 import retrofit2.http.*
 
@@ -14,18 +14,19 @@ interface ApiInterface {
         @Query("q") cityName: String
     ): Single<ArrayList<ModelRecCityName>>
 
-    @GET("forecasts/v1/daily/1day/{cityId}")
-    fun getOneDayForecast(
-        @Query("apikey") apikey: String = "JrXcR2XrjVJV6SYbel6qGbyyQaW43MY2",
-        @Path("cityId") cityId: Int,
-        @Query("details") details: Boolean = true
-    ): Single<ModelGetOneDayForecast>
-
     @GET("currentconditions/v1/{cityId}")
     fun getCurrentCondition(
-        @Query("apikey") apikey: String = "JrXcR2XrjVJV6SYbel6qGbyyQaW43MY2",
         @Path("cityId") cityId: Int,
+        @Query("apikey") apikey: String = "JrXcR2XrjVJV6SYbel6qGbyyQaW43MY2",
         @Query("details") details: Boolean = true
     ): Single<ArrayList<ModelGetCurrentCondition>>
+
+    @GET("forecasts/v1/daily/5day/{cityId}")
+    fun getFiveDayForecast(
+        @Path("cityId") cityId: Int,
+        @Query("apikey") apikey: String = "JrXcR2XrjVJV6SYbel6qGbyyQaW43MY2",
+        @Query("details") details: Boolean = true,
+        @Query("metric") metric: Boolean = true
+    ): Single<ModelGetFutureDayForecast>
 
 }

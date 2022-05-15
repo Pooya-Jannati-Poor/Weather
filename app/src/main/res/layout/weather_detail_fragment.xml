@@ -6,8 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:layoutDirection="rtl"
-        android:textDirection="rtl"
         tools:context=".view.WeatherDetailFragment">
 
         <LinearLayout
@@ -27,23 +25,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_12sdp"
-                android:orientation="horizontal">
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                android:textDirection="rtl">
 
                 <ImageView
                     android:id="@+id/imgCurrentTemperatureIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/s_12" />
+                    tools:src="@drawable/s_12" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="C˚"
+                    android:textSize="@dimen/_30sdp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvCurrentTimeTemperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:text="30˚C"
                     android:textSize="@dimen/_30sdp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="30" />
 
             </LinearLayout>
 
@@ -60,7 +67,9 @@
                 android:layout_marginHorizontal="@dimen/_32sdp"
                 android:layout_marginVertical="@dimen/_12sdp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                android:textDirection="rtl">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/_4sdp"
-                    android:text="12" />
+                    tools:text="12" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -119,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/_4sdp"
-                    android:text="WSW" />
+                    tools:text="WSW" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -133,8 +142,8 @@
                 android:id="@+id/tvCurrentTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16:17"
-                android:textSize="@dimen/_16ssp" />
+                android:textSize="@dimen/_16ssp"
+                tools:text="16:17" />
 
             <TextView
                 android:id="@+id/tvCurrentDate"
@@ -142,6 +151,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_12sdp"
                 android:text="Wed May 11,2022" />
+
+            <Button
+                android:id="@+id/btnChangeFragmentFiveDayForecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 day forecast" />
 
         </LinearLayout>
 

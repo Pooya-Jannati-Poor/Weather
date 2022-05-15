@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ModelTemperatureDetail(
 
     @SerializedName("Value")
-    val value: Int,
+    val value: Float,
 
     @SerializedName("Unit")
     val unit: String,
