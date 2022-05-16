@@ -113,10 +113,13 @@ class WeatherDetailFragment : Fragment() {
 
             setCurrentConditionData()
 
+            sendOneDayForecastApi()
+
         })
 
     }
 
+    private lateinit var currentDayMinMaxTemperature: String
     private lateinit var currentTemperature: String
     private lateinit var currentTemperatureIcon: String
     private lateinit var currentWeatherTitle: String
@@ -138,8 +141,6 @@ class WeatherDetailFragment : Fragment() {
         currentWindDirection = tempModelGetCurrentCondition.wind.direction.localized
 
         getCurrentDate()
-
-        setCurrentDataWithView()
 
         changeFragmentToFiveDayForecast()
 
@@ -163,6 +164,27 @@ class WeatherDetailFragment : Fragment() {
 
     }
 
+    private fun sendOneDayForecastApi() {
+
+        viewModel.sendOneDayForecastApi(requireActivity(), cityId!!)
+
+        observeOneDayForecastApi()
+
+    }
+
+    private fun observeOneDayForecastApi() {
+
+        viewModel.lsModelGetOneDayForecastObserver.observe(requireActivity(), Observer {
+
+            currentDayMinMaxTemperature = "${it.dailyForecasts[0].temperature.minimum.value}˚/${it.dailyForecasts[0].temperature.maximum.value}˚"
+            currentRainPercent = it.dailyForecasts[0].day.precipitationProbability.toString()
+
+            setCurrentDataWithView()
+
+        })
+
+    }
+
     private fun setCurrentDataWithView() {
 
         tvCurrentTimeTemperature.text = currentTemperature
@@ -178,6 +200,8 @@ class WeatherDetailFragment : Fragment() {
         )
         tvCurrentTime.text = currentTime
         tvCurrentDate.text = currentDate
+        tvRainPercent.text = currentRainPercent
+        tvMinMaxTemperature.text = currentDayMinMaxTemperature
 
     }
 

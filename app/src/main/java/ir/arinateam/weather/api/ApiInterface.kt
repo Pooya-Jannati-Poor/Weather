@@ -21,6 +21,14 @@ interface ApiInterface {
         @Query("details") details: Boolean = true
     ): Single<ArrayList<ModelGetCurrentCondition>>
 
+    @GET("forecasts/v1/daily/1day/{cityId}")
+    fun getOneDayForecast(
+        @Path("cityId") cityId: Int,
+        @Query("apikey") apikey: String = "JrXcR2XrjVJV6SYbel6qGbyyQaW43MY2",
+        @Query("details") details: Boolean = true,
+        @Query("metric") metric: Boolean = true
+    ): Single<ModelGetFutureDayForecast>
+
     @GET("forecasts/v1/daily/5day/{cityId}")
     fun getFiveDayForecast(
         @Path("cityId") cityId: Int,

@@ -46,6 +46,10 @@ class ApiClient {
         return request.getCurrentCondition(cityId = cityId)
     }
 
+    fun getOneDayForecast(cityId: Int): Single<ModelGetFutureDayForecast> {
+        return request.getOneDayForecast(cityId = cityId)
+    }
+
     fun getFiveDayForecast(cityId: Int): Single<ModelGetFutureDayForecast> {
         return request.getFiveDayForecast(cityId = cityId)
     }

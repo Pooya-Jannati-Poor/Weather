@@ -40,7 +40,7 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
                         lsModelGetCurrentConditionObserver.postValue(t)
 
-                        currentConditionApiDisposable.clear()
+                        clearDisposable()
 
                     }
 
@@ -50,7 +50,7 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
                         e.printStackTrace()
 
-                        currentConditionApiDisposable.clear()
+                        clearDisposable()
 
                     }
 
@@ -60,8 +60,55 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
     }
 
-    override fun onCleared() {
+    private val oneDayForecastApiDisposable: CompositeDisposable = CompositeDisposable()
+    val lsModelGetOneDayForecastObserver: MutableLiveData<ModelGetFutureDayForecast> =
+        MutableLiveData()
+
+    fun sendOneDayForecastApi(context: Context, cityId: Int) {
+
+        loading = LoadingAnimation(context)
+
+        apiClient = ApiClient()
+
+        oneDayForecastApiDisposable.add(
+            apiClient.getOneDayForecast(cityId)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object :
+                    DisposableSingleObserver<ModelGetFutureDayForecast>() {
+                    override fun onSuccess(t: ModelGetFutureDayForecast) {
+
+                        loading.hideDialog()
+
+                        lsModelGetOneDayForecastObserver.postValue(t)
+
+                        clearDisposable()
+
+                    }
+
+                    override fun onError(e: Throwable) {
+
+                        loading.hideDialog()
+
+                        e.printStackTrace()
+
+                        clearDisposable()
+
+                    }
+
+                })
+
+        )
+
+    }
+
+    private fun clearDisposable() {
+        oneDayForecastApiDisposable.clear()
         currentConditionApiDisposable.clear()
+    }
+
+    override fun onCleared() {
+        clearDisposable()
         super.onCleared()
     }
 
