@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import ir.arinateam.weather.R
 import ir.arinateam.weather.databinding.WeatherDetailFragmentBinding
 import ir.arinateam.weather.model.ModelGetCurrentCondition
@@ -36,6 +37,7 @@ class WeatherDetailFragment : Fragment() {
     private lateinit var tvCurrentTime: TextView
     private lateinit var tvCurrentDate: TextView
     private lateinit var btnChangeFragmentFiveDayForecast: Button
+    private lateinit var btnChangeFragmentRadar: Button
 
     private lateinit var viewModel: ViewModelWeatherDetailFragment
 
@@ -72,6 +74,7 @@ class WeatherDetailFragment : Fragment() {
         tvCurrentTime = bindingFragment.tvCurrentTime
         tvCurrentDate = bindingFragment.tvCurrentDate
         btnChangeFragmentFiveDayForecast = bindingFragment.btnChangeFragmentFiveDayForecast
+        btnChangeFragmentRadar = bindingFragment.btnChangeFragmentRadar
 
     }
 
@@ -144,6 +147,8 @@ class WeatherDetailFragment : Fragment() {
 
         changeFragmentToFiveDayForecast()
 
+        changeFragmentToRadar()
+
     }
 
     private fun getCurrentDate() {
@@ -176,7 +181,8 @@ class WeatherDetailFragment : Fragment() {
 
         viewModel.lsModelGetOneDayForecastObserver.observe(requireActivity(), Observer {
 
-            currentDayMinMaxTemperature = "${it.dailyForecasts[0].temperature.minimum.value}˚/${it.dailyForecasts[0].temperature.maximum.value}˚"
+            currentDayMinMaxTemperature =
+                "${it.dailyForecasts[0].temperature.minimum.value}˚/${it.dailyForecasts[0].temperature.maximum.value}˚"
             currentRainPercent = it.dailyForecasts[0].day.precipitationProbability.toString()
 
             setCurrentDataWithView()
@@ -217,6 +223,16 @@ class WeatherDetailFragment : Fragment() {
                     R.id.action_weatherDetailFragment_to_fiveDayForecastFragment,
                     bundle
                 )
+
+        }
+
+    }
+
+    private fun changeFragmentToRadar() {
+
+        btnChangeFragmentRadar.setOnClickListener {
+
+            findNavController().navigate(R.id.action_weatherDetailFragment_to_radarFragment)
 
         }
 

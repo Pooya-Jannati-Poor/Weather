@@ -158,6 +158,12 @@
                 android:layout_height="wrap_content"
                 android:text="5 day forecast" />
 
+            <Button
+                android:id="@+id/btnChangeFragmentRadar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Radar" />
+
         </LinearLayout>
 
     </FrameLayout>
