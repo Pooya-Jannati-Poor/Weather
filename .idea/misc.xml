@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_btn_radar_layer_type.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/bg_btn_radar_layer_type_selected.xml" value="0.1985" />
+        <entry key="app/src/main/res/drawable/bg_btn_search.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/bg_edit_text_search_city.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/bg_layout_radar_layer.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/ic_rain_percent.xml" value="0.153" />
         <entry key="app/src/main/res/layout-land/activity_main2.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2833333333333333" />

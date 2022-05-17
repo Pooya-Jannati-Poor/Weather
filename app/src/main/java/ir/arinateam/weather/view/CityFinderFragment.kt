@@ -88,8 +88,9 @@ class CityFinderFragment : Fragment() {
 
         btnSearch.setOnClickListener {
 
-            validateCityNameInput()
+//            validateCityNameInput()
 
+            findNavController().navigate(R.id.action_cityFinderFragment_to_radarFragment)
         }
 
     }

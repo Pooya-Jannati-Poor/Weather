@@ -1,6 +1,5 @@
 package ir.arinateam.weather
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -116,6 +115,8 @@ class RadarFragment : Fragment() {
 
         btnRadarTemp.setOnClickListener {
 
+            changeSelectedButtonBackgroundToSelectedAndOtherButtonsToUnselected(btnRadarTemp)
+
             setWebViewAddress()
 
             webViewRadar.loadUrl(radarWebViewTempAddress)
@@ -130,6 +131,8 @@ class RadarFragment : Fragment() {
     private fun setRainOverlay() {
 
         btnRadarRain.setOnClickListener {
+
+            changeSelectedButtonBackgroundToSelectedAndOtherButtonsToUnselected(btnRadarRain)
 
             setWebViewAddress()
 
@@ -146,6 +149,8 @@ class RadarFragment : Fragment() {
 
         btnRadarSnow.setOnClickListener {
 
+            changeSelectedButtonBackgroundToSelectedAndOtherButtonsToUnselected(btnRadarSnow)
+
             setWebViewAddress()
 
             webViewRadar.loadUrl(radarWebViewSnowAddress)
@@ -160,6 +165,8 @@ class RadarFragment : Fragment() {
     private fun setWindOverlay() {
 
         btnRadarWind.setOnClickListener {
+
+            changeSelectedButtonBackgroundToSelectedAndOtherButtonsToUnselected(btnRadarWind)
 
             setWebViewAddress()
 
@@ -176,6 +183,8 @@ class RadarFragment : Fragment() {
 
         btnRadarPressure.setOnClickListener {
 
+            changeSelectedButtonBackgroundToSelectedAndOtherButtonsToUnselected(btnRadarPressure)
+
             setWebViewAddress()
 
             webViewRadar.loadUrl(radarWebViewPressureAddress)
@@ -190,6 +199,8 @@ class RadarFragment : Fragment() {
     private fun setHumidityOverlay() {
 
         btnRadarHumidity.setOnClickListener {
+
+            changeSelectedButtonBackgroundToSelectedAndOtherButtonsToUnselected(btnRadarHumidity)
 
             setWebViewAddress()
 
@@ -206,11 +217,28 @@ class RadarFragment : Fragment() {
 
         btnRadarClouds.setOnClickListener {
 
+            changeSelectedButtonBackgroundToSelectedAndOtherButtonsToUnselected(btnRadarClouds)
+
             setWebViewAddress()
 
             webViewRadar.loadUrl(radarWebViewCloudsAddress)
 
         }
+
+    }
+
+    private fun changeSelectedButtonBackgroundToSelectedAndOtherButtonsToUnselected(selectedButton: Button) {
+
+        btnRadarTemp.setBackgroundResource(R.drawable.bg_btn_radar_layer_type_unselected)
+        btnRadarRain.setBackgroundResource(R.drawable.bg_btn_radar_layer_type_unselected)
+        btnRadarSnow.setBackgroundResource(R.drawable.bg_btn_radar_layer_type_unselected)
+        btnRadarWind.setBackgroundResource(R.drawable.bg_btn_radar_layer_type_unselected)
+        btnRadarPressure.setBackgroundResource(R.drawable.bg_btn_radar_layer_type_unselected)
+        btnRadarHumidity.setBackgroundResource(R.drawable.bg_btn_radar_layer_type_unselected)
+        btnRadarClouds.setBackgroundResource(R.drawable.bg_btn_radar_layer_type_unselected)
+
+        selectedButton.setBackgroundResource(R.drawable.bg_btn_radar_layer_type_selected)
+
 
     }
 

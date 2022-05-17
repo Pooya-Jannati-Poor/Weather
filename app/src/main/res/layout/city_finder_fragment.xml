@@ -19,15 +19,20 @@
                 android:id="@+id/edCityName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp"
+                android:background="@drawable/bg_edit_text_search_city"
                 android:hint="City Name" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSearch"
                 android:layout_width="match_parent"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_16sdp"
-                android:text="Search"
-                app:backgroundTint="@color/black" />
+                android:textColor="@color/white"
+                android:foregroundTint="@color/black"
+                android:background="@drawable/bg_btn_search"
+                android:text="Search" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recCityName"
