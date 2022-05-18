@@ -11,6 +11,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import ir.arinateam.weather.api.ApiClient
 import ir.arinateam.weather.model.ModelGetCurrentCondition
 import ir.arinateam.weather.model.ModelGetFutureDayForecast
+import ir.arinateam.weather.model.ModelGetTwelveHoursForecast
 import ir.arinateam.weather.utils.LoadingAnimation
 
 class ViewModelWeatherDetailFragment(application: Application) : AndroidViewModel(application) {
@@ -40,8 +41,6 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
                         lsModelGetCurrentConditionObserver.postValue(t)
 
-                        clearDisposable()
-
                     }
 
                     override fun onError(e: Throwable) {
@@ -49,8 +48,6 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
                         loading.hideDialog()
 
                         e.printStackTrace()
-
-                        clearDisposable()
 
                     }
 
@@ -82,8 +79,6 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
                         lsModelGetOneDayForecastObserver.postValue(t)
 
-                        clearDisposable()
-
                     }
 
                     override fun onError(e: Throwable) {
@@ -92,7 +87,43 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
                         e.printStackTrace()
 
-                        clearDisposable()
+                    }
+
+                })
+
+        )
+
+    }
+
+    private val twelveHoursForecastApiDisposable: CompositeDisposable = CompositeDisposable()
+    val lsModelGetTwelveHoursForecast: MutableLiveData<ArrayList<ModelGetTwelveHoursForecast>> =
+        MutableLiveData()
+
+    fun sendTwelveHoursForecastApi(context: Context, cityId: Int) {
+
+        loading = LoadingAnimation(context)
+
+        apiClient = ApiClient()
+
+        twelveHoursForecastApiDisposable.add(
+            apiClient.getTwelveHoursForecast(cityId)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object :
+                    DisposableSingleObserver<ArrayList<ModelGetTwelveHoursForecast>>() {
+                    override fun onSuccess(t: ArrayList<ModelGetTwelveHoursForecast>) {
+
+                        loading.hideDialog()
+
+                        lsModelGetTwelveHoursForecast.postValue(t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+
+                        loading.hideDialog()
+
+                        e.printStackTrace()
 
                     }
 

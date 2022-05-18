@@ -13,9 +13,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ir.arinateam.weather.R
+import ir.arinateam.weather.adapter.AdapterRecTwelveHoursForecast
 import ir.arinateam.weather.databinding.WeatherDetailFragmentBinding
 import ir.arinateam.weather.model.ModelGetCurrentCondition
+import ir.arinateam.weather.model.ModelGetTwelveHoursForecast
 import ir.arinateam.weather.viewmodel.ViewModelWeatherDetailFragment
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -38,6 +42,7 @@ class WeatherDetailFragment : Fragment() {
     private lateinit var tvCurrentDate: TextView
     private lateinit var btnChangeFragmentFiveDayForecast: Button
     private lateinit var btnChangeFragmentRadar: Button
+    private lateinit var recTwelveHoursForecast: RecyclerView
 
     private lateinit var viewModel: ViewModelWeatherDetailFragment
 
@@ -75,6 +80,7 @@ class WeatherDetailFragment : Fragment() {
         tvCurrentDate = bindingFragment.tvCurrentDate
         btnChangeFragmentFiveDayForecast = bindingFragment.btnChangeFragmentFiveDayForecast
         btnChangeFragmentRadar = bindingFragment.btnChangeFragmentRadar
+        recTwelveHoursForecast = bindingFragment.recTwelveHoursForecast
 
     }
 
@@ -187,6 +193,8 @@ class WeatherDetailFragment : Fragment() {
 
             setCurrentDataWithView()
 
+            sendTwelveHoursForecastApi()
+
         })
 
     }
@@ -208,6 +216,38 @@ class WeatherDetailFragment : Fragment() {
         tvCurrentDate.text = currentDate
         tvRainPercent.text = currentRainPercent
         tvMinMaxTemperature.text = currentDayMinMaxTemperature
+
+    }
+
+    private lateinit var lsModelGetTwelveHoursForecast: ArrayList<ModelGetTwelveHoursForecast>
+
+    private fun sendTwelveHoursForecastApi() {
+
+        viewModel.sendTwelveHoursForecastApi(requireActivity(), cityId!!)
+
+        viewModel.lsModelGetTwelveHoursForecast.observe(requireActivity(), Observer {
+
+            lsModelGetTwelveHoursForecast = ArrayList()
+
+            lsModelGetTwelveHoursForecast.addAll(it)
+
+            setRecTwelveHours()
+
+        })
+
+    }
+
+    private lateinit var adapterRecTwelveHoursForecast: AdapterRecTwelveHoursForecast
+
+    private fun setRecTwelveHours() {
+
+        adapterRecTwelveHoursForecast =
+            AdapterRecTwelveHoursForecast(requireActivity(), lsModelGetTwelveHoursForecast)
+
+        val linearLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        recTwelveHoursForecast.layoutManager = linearLayoutManager
+        recTwelveHoursForecast.adapter = adapterRecTwelveHoursForecast
 
     }
 

@@ -3,6 +3,7 @@ package ir.arinateam.weather.api
 import io.reactivex.rxjava3.core.Single
 import ir.arinateam.weather.model.ModelGetCurrentCondition
 import ir.arinateam.weather.model.ModelGetFutureDayForecast
+import ir.arinateam.weather.model.ModelGetTwelveHoursForecast
 import ir.arinateam.weather.model.ModelRecCityName
 import retrofit2.http.*
 
@@ -28,6 +29,14 @@ interface ApiInterface {
         @Query("details") details: Boolean = true,
         @Query("metric") metric: Boolean = true
     ): Single<ModelGetFutureDayForecast>
+
+    @GET("forecasts/v1/hourly/12hour/{cityId}")
+    fun getTwelveHoursForecast(
+        @Path("cityId") cityId: Int,
+        @Query("apikey") apikey: String = "JrXcR2XrjVJV6SYbel6qGbyyQaW43MY2",
+        @Query("details") details: Boolean = true,
+        @Query("metric") metric: Boolean = true
+    ): Single<ArrayList<ModelGetTwelveHoursForecast>>
 
     @GET("forecasts/v1/daily/5day/{cityId}")
     fun getFiveDayForecast(

@@ -164,6 +164,20 @@
                 android:layout_height="wrap_content"
                 android:text="Radar" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginVertical="@dimen/_8sdp"
+                android:text="12 Hours Forecast"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recTwelveHoursForecast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
     </FrameLayout>
