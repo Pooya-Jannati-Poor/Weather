@@ -131,9 +131,9 @@
                     tools:text="WSW" />
 
                 <ImageView
+                    android:id="@+id/imgWindDirection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:rotation="45"
                     android:src="@drawable/ic_wind_direction" />
 
             </LinearLayout>

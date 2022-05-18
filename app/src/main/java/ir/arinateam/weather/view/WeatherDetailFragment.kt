@@ -38,6 +38,7 @@ class WeatherDetailFragment : Fragment() {
     private lateinit var tvRainPercent: TextView
     private lateinit var tvCurrentWindSpeed: TextView
     private lateinit var tvCurrentWindDirection: TextView
+    private lateinit var imgWindDirection: ImageView
     private lateinit var tvCurrentTime: TextView
     private lateinit var tvCurrentDate: TextView
     private lateinit var btnChangeFragmentFiveDayForecast: Button
@@ -76,6 +77,7 @@ class WeatherDetailFragment : Fragment() {
         tvRainPercent = bindingFragment.tvRainPercent
         tvCurrentWindSpeed = bindingFragment.tvCurrentWindSpeed
         tvCurrentWindDirection = bindingFragment.tvCurrentWindDirection
+        imgWindDirection = bindingFragment.imgWindDirection
         tvCurrentTime = bindingFragment.tvCurrentTime
         tvCurrentDate = bindingFragment.tvCurrentDate
         btnChangeFragmentFiveDayForecast = bindingFragment.btnChangeFragmentFiveDayForecast
@@ -136,6 +138,7 @@ class WeatherDetailFragment : Fragment() {
     private lateinit var currentDate: String
     private lateinit var currentWindSpeed: String
     private lateinit var currentWindDirection: String
+    private lateinit var currentWindDirectionDegree: String
     private lateinit var currentRainPercent: String
 
     private fun setCurrentConditionData() {
@@ -148,6 +151,7 @@ class WeatherDetailFragment : Fragment() {
         currentWeatherTitle = tempModelGetCurrentCondition.weatherText
         currentWindSpeed = tempModelGetCurrentCondition.wind.speed.speedValueMetric.value.toString()
         currentWindDirection = tempModelGetCurrentCondition.wind.direction.localized
+        currentWindDirectionDegree = tempModelGetCurrentCondition.wind.direction.degrees.toString()
 
         getCurrentDate()
 
@@ -204,6 +208,7 @@ class WeatherDetailFragment : Fragment() {
         tvCurrentTimeTemperature.text = currentTemperature
         tvCurrentDayConditionName.text = currentWeatherTitle
         tvCurrentWindDirection.text = currentWindDirection
+        imgWindDirection.rotation = currentWindDirectionDegree.toFloat()
         tvCurrentWindSpeed.text = currentWindSpeed
         imgCurrentTemperatureIcon.setBackgroundResource(
             resources.getIdentifier(
