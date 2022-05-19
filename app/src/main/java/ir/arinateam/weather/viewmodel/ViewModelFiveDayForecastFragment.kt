@@ -3,6 +3,7 @@ package ir.arinateam.weather.viewmodel
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -12,14 +13,16 @@ import ir.arinateam.weather.api.ApiClient
 import ir.arinateam.weather.model.ModelGetFutureDayForecast
 import ir.arinateam.weather.utils.LoadingAnimation
 
-class ViewModelFiveDayForecastFragment(application: Application): AndroidViewModel(application) {
+class ViewModelFiveDayForecastFragment(application: Application) : AndroidViewModel(application) {
 
     private lateinit var loading: LoadingAnimation
 
     private lateinit var apiClient: ApiClient
 
     private val fiveDayForecastApiDisposable: CompositeDisposable = CompositeDisposable()
-    val lsModelGetFiveDayForecastObserver: MutableLiveData<ModelGetFutureDayForecast> =
+    val lsModelGetFiveDayForecastObserver: LiveData<ModelGetFutureDayForecast>
+    get() = _lsModelGetFiveDayForecastObserver
+    private val _lsModelGetFiveDayForecastObserver: MutableLiveData<ModelGetFutureDayForecast> =
         MutableLiveData()
 
     fun sendFiveDayForecastApi(context: Context, cityId: Int) {
@@ -38,7 +41,7 @@ class ViewModelFiveDayForecastFragment(application: Application): AndroidViewMod
 
                         loading.hideDialog()
 
-                        lsModelGetFiveDayForecastObserver.postValue(t)
+                        _lsModelGetFiveDayForecastObserver.postValue(t)
 
                         clearDisposable()
 

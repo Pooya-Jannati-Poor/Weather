@@ -22,8 +22,13 @@ class ViewModelCityFinderFragment(application: Application) : AndroidViewModel(a
 
     private lateinit var apiClient: ApiClient
     private val citySearchApiDisposable: CompositeDisposable = CompositeDisposable()
-    val citySearchApiResult: MutableLiveData<Boolean> = MutableLiveData()
-    val lsModelRecCityNameObserver: MutableLiveData<ArrayList<ModelRecCityName>> = MutableLiveData()
+    val citySearchApiResult: LiveData<Boolean>
+        get() = _citySearchApiResult
+    private val _citySearchApiResult: MutableLiveData<Boolean> = MutableLiveData()
+    val lsModelRecCityNameObserver: LiveData<ArrayList<ModelRecCityName>>
+        get() = _lsModelRecCityNameObserver
+    private val _lsModelRecCityNameObserver: MutableLiveData<ArrayList<ModelRecCityName>> =
+        MutableLiveData()
 
     fun sendCitySearchApi(context: Context, cityName: String) {
 
@@ -40,9 +45,9 @@ class ViewModelCityFinderFragment(application: Application) : AndroidViewModel(a
 
                         loading.hideDialog()
 
-                        lsModelRecCityNameObserver.postValue(t)
+                        _lsModelRecCityNameObserver.postValue(t)
 
-                        citySearchApiResult.postValue(true)
+                        _citySearchApiResult.postValue(true)
 
                     }
 
@@ -52,7 +57,7 @@ class ViewModelCityFinderFragment(application: Application) : AndroidViewModel(a
 
                         e.printStackTrace()
 
-                        citySearchApiResult.postValue(false)
+                        _citySearchApiResult.postValue(false)
 
                     }
 

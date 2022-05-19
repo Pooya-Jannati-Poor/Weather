@@ -3,6 +3,7 @@ package ir.arinateam.weather.viewmodel
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -31,7 +32,9 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
     private lateinit var apiClient: ApiClient
     private val currentConditionApiDisposable: CompositeDisposable = CompositeDisposable()
-    val lsModelGetCurrentConditionObserver: MutableLiveData<ArrayList<ModelGetCurrentCondition>> =
+    val lsModelGetCurrentConditionObserver: LiveData<ArrayList<ModelGetCurrentCondition>>
+        get() = _lsModelGetCurrentConditionObserver
+    private val _lsModelGetCurrentConditionObserver: MutableLiveData<ArrayList<ModelGetCurrentCondition>> =
         MutableLiveData()
 
     fun sendCurrentConditionApi(context: Context, cityId: Int) {
@@ -50,7 +53,7 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
                         loading.hideDialog()
 
-                        lsModelGetCurrentConditionObserver.postValue(t)
+                        _lsModelGetCurrentConditionObserver.postValue(t)
 
                     }
 
@@ -69,7 +72,9 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
     }
 
     private val oneDayForecastApiDisposable: CompositeDisposable = CompositeDisposable()
-    val lsModelGetOneDayForecastObserver: MutableLiveData<ModelGetFutureDayForecast> =
+    val lsModelGetOneDayForecastObserver: LiveData<ModelGetFutureDayForecast>
+        get() = _lsModelGetOneDayForecastObserver
+    private val _lsModelGetOneDayForecastObserver: MutableLiveData<ModelGetFutureDayForecast> =
         MutableLiveData()
 
     fun sendOneDayForecastApi(context: Context, cityId: Int) {
@@ -88,7 +93,7 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
                         loading.hideDialog()
 
-                        lsModelGetOneDayForecastObserver.postValue(t)
+                        _lsModelGetOneDayForecastObserver.postValue(t)
 
                     }
 
@@ -107,7 +112,9 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
     }
 
     private val twelveHoursForecastApiDisposable: CompositeDisposable = CompositeDisposable()
-    val lsModelGetTwelveHoursForecast: MutableLiveData<ArrayList<ModelGetTwelveHoursForecast>> =
+    val lsModelGetTwelveHoursForecast: LiveData<ArrayList<ModelGetTwelveHoursForecast>>
+        get() = _lsModelGetTwelveHoursForecast
+    private val _lsModelGetTwelveHoursForecast: MutableLiveData<ArrayList<ModelGetTwelveHoursForecast>> =
         MutableLiveData()
 
     fun sendTwelveHoursForecastApi(context: Context, cityId: Int) {
@@ -126,7 +133,7 @@ class ViewModelWeatherDetailFragment(application: Application) : AndroidViewMode
 
                         loading.hideDialog()
 
-                        lsModelGetTwelveHoursForecast.postValue(t)
+                        _lsModelGetTwelveHoursForecast.postValue(t)
 
                     }
 

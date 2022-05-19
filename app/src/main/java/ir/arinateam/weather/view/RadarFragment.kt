@@ -9,17 +9,13 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import ir.arinateam.weather.R
 import ir.arinateam.weather.databinding.RadarFragmentBinding
 import ir.arinateam.weather.utils.LoadingAnimation
-import ir.arinateam.weather.viewmodel.ViewModelRadarFragment
 
 class RadarFragment : Fragment() {
 
     private lateinit var bindingFragment: RadarFragmentBinding
-
-    private lateinit var viewModel: ViewModelRadarFragment
 
     private lateinit var webViewRadar: WebView
     private lateinit var btnRadarRain: Button
@@ -44,8 +40,6 @@ class RadarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-
-        initViewModel()
 
         setWebViewAddress()
 
@@ -77,12 +71,6 @@ class RadarFragment : Fragment() {
         btnRadarPressure = bindingFragment.btnRadarPressure
         btnRadarHumidity = bindingFragment.btnRadarHumidity
         btnRadarClouds = bindingFragment.btnRadarClouds
-
-    }
-
-    private fun initViewModel() {
-
-        viewModel = ViewModelProvider(this)[ViewModelRadarFragment::class.java]
 
     }
 
