@@ -47,6 +47,8 @@ class CityFinderFragment : Fragment() {
 
         initViewModel()
 
+        checkSharedPreferenceForCityId()
+
         clickBtnSearch()
 
     }
@@ -62,6 +64,43 @@ class CityFinderFragment : Fragment() {
     private fun initViewModel() {
 
         viewModel = ViewModelProvider(this)[ViewModelCityFinderFragment::class.java]
+
+    }
+
+    private fun checkSharedPreferenceForCityId() {
+
+        viewModel.readCityIdFromSharedPreference(requireActivity())
+
+        observeCityId()
+
+    }
+
+    private var cityId: Int? = null
+
+    private fun observeCityId() {
+
+        viewModel.cityId.observe(requireActivity(), Observer {
+
+            if (it == 0)
+                return@Observer
+
+            cityId = it
+
+            changeFragmentToWeatherDetailFragment()
+
+        })
+
+    }
+
+    private fun changeFragmentToWeatherDetailFragment() {
+
+        val bundle = Bundle()
+        bundle.putInt("cityId", cityId!!)
+
+        findNavController().navigate(
+            R.id.action_cityFinderFragment_to_weatherDetailFragment,
+            bundle
+        )
 
     }
 
@@ -133,10 +172,9 @@ class CityFinderFragment : Fragment() {
 
     }
 
-
     private fun setRecSearchCity() {
 
-        adapterRecCityName = AdapterRecSearchCity(requireActivity(), lsModelRecCityName)
+        adapterRecCityName = AdapterRecSearchCity(requireActivity(), lsModelRecCityName, viewModel)
 
         val linearLayoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)

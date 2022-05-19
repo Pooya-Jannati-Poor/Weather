@@ -13,6 +13,7 @@ import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ir.arinateam.weather.api.ApiClient
 import ir.arinateam.weather.model.ModelRecCityName
+import ir.arinateam.weather.repository.CityIdManagerRepository
 import ir.arinateam.weather.utils.LoadingAnimation
 
 class ViewModelCityFinderFragment(application: Application) : AndroidViewModel(application) {
@@ -58,6 +59,26 @@ class ViewModelCityFinderFragment(application: Application) : AndroidViewModel(a
                 })
 
         )
+
+    }
+
+    private lateinit var cityIdManagerRepository: CityIdManagerRepository
+
+    fun saveCityIdInSharedPreference(context: Context, cityId: Int) {
+
+        cityIdManagerRepository = CityIdManagerRepository(context)
+
+        cityIdManagerRepository.saveCityIdInSharedPreference(cityId)
+
+    }
+
+    val cityId: MutableLiveData<Int> = MutableLiveData()
+
+    fun readCityIdFromSharedPreference(context: Context) {
+
+        cityIdManagerRepository = CityIdManagerRepository(context)
+
+        cityId.postValue(cityIdManagerRepository.readAndReturnCityIdFromSharedPreference())
 
     }
 

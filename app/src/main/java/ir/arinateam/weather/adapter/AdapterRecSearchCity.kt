@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.arinateam.weather.R
 import ir.arinateam.weather.databinding.LayoutRecSearchCityBinding
 import ir.arinateam.weather.model.ModelRecCityName
+import ir.arinateam.weather.viewmodel.ViewModelCityFinderFragment
+import ir.arinateam.weather.viewmodel.ViewModelWeatherDetailFragment
 
 class AdapterRecSearchCity(
     private val context: Context,
-    private val lsModelRecCityName: ArrayList<ModelRecCityName>
+    private val lsModelRecCityName: ArrayList<ModelRecCityName>,
+    private val viewModel: ViewModelCityFinderFragment
 ) : RecyclerView.Adapter<AdapterRecSearchCity.ItemAdapter>() {
 
     private lateinit var bindingAdapter: LayoutRecSearchCityBinding
@@ -37,7 +40,10 @@ class AdapterRecSearchCity(
 
         holder.itemView.setOnClickListener {
 
+            viewModel.saveCityIdInSharedPreference(context, tempModel.id)
+
             changeFragmentToWeatherDetail(it, tempModel.id)
+
 
         }
 
@@ -50,6 +56,11 @@ class AdapterRecSearchCity(
 
         Navigation.findNavController(view)
             .navigate(R.id.action_cityFinderFragment_to_weatherDetailFragment, bundle)
+
+    }
+
+    private fun saveCityIdInSharedPreference() {
+
 
     }
 

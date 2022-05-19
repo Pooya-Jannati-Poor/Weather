@@ -1,4 +1,4 @@
-package ir.arinateam.weather
+package ir.arinateam.weather.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import android.webkit.WebViewClient
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import ir.arinateam.weather.R
 import ir.arinateam.weather.databinding.RadarFragmentBinding
 import ir.arinateam.weather.utils.LoadingAnimation
 import ir.arinateam.weather.viewmodel.ViewModelRadarFragment
@@ -103,6 +104,7 @@ class RadarFragment : Fragment() {
                 loading.hideDialog()
             }
 
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 view?.loadUrl(url!!)
                 return true

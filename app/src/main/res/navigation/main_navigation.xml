@@ -12,10 +12,8 @@
         tools:layout="@layout/city_finder_fragment">
         <action
             android:id="@+id/action_cityFinderFragment_to_weatherDetailFragment"
-            app:destination="@id/weatherDetailFragment" />
-        <action
-            android:id="@+id/action_cityFinderFragment_to_radarFragment"
-            app:destination="@id/radarFragment" />
+            app:destination="@id/weatherDetailFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/weatherDetailFragment"
@@ -28,6 +26,9 @@
         <action
             android:id="@+id/action_weatherDetailFragment_to_radarFragment"
             app:destination="@id/radarFragment" />
+        <action
+            android:id="@+id/action_weatherDetailFragment_to_cityFinderFragment"
+            app:destination="@id/cityFinderFragment" />
     </fragment>
     <fragment
         android:id="@+id/fiveDayForecastFragment"
@@ -36,7 +37,7 @@
         tools:layout="@layout/five_day_forecast_fragment" />
     <fragment
         android:id="@+id/radarFragment"
-        android:name="ir.arinateam.weather.RadarFragment"
+        android:name="ir.arinateam.weather.view.RadarFragment"
         android:label="RadarFragment"
         tools:layout="@layout/radar_fragment" />
 </navigation>

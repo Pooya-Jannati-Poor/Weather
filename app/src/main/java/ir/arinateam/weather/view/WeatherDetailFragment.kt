@@ -31,6 +31,7 @@ class WeatherDetailFragment : Fragment() {
 
     private lateinit var bindingFragment: WeatherDetailFragmentBinding
 
+    private lateinit var imgBackToSearchCity: ImageView
     private lateinit var tvMinMaxTemperature: TextView
     private lateinit var imgCurrentTemperatureIcon: ImageView
     private lateinit var tvCurrentTimeTemperature: TextView
@@ -64,12 +65,15 @@ class WeatherDetailFragment : Fragment() {
 
         initViewModel()
 
+        changeFragmentToCityFinder()
+
         getCityIdFromBundle()
 
     }
 
     private fun initView() {
 
+        imgBackToSearchCity = bindingFragment.imgBackToSearchCity
         tvMinMaxTemperature = bindingFragment.tvMinMaxTemperature
         imgCurrentTemperatureIcon = bindingFragment.imgCurrentTemperatureIcon
         tvCurrentTimeTemperature = bindingFragment.tvCurrentTimeTemperature
@@ -89,6 +93,24 @@ class WeatherDetailFragment : Fragment() {
     private fun initViewModel() {
 
         viewModel = ViewModelProvider(this)[ViewModelWeatherDetailFragment::class.java]
+
+    }
+
+    private fun changeFragmentToCityFinder() {
+
+        imgBackToSearchCity.setOnClickListener {
+
+            clearCityIdFromSharedPreference()
+
+            findNavController().navigate(R.id.action_weatherDetailFragment_to_cityFinderFragment)
+
+        }
+
+    }
+
+    private fun clearCityIdFromSharedPreference() {
+
+        viewModel.clearCityIdFromSharedPreference(requireActivity())
 
     }
 

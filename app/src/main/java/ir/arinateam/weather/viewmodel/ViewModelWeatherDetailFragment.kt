@@ -12,9 +12,20 @@ import ir.arinateam.weather.api.ApiClient
 import ir.arinateam.weather.model.ModelGetCurrentCondition
 import ir.arinateam.weather.model.ModelGetFutureDayForecast
 import ir.arinateam.weather.model.ModelGetTwelveHoursForecast
+import ir.arinateam.weather.repository.CityIdManagerRepository
 import ir.arinateam.weather.utils.LoadingAnimation
 
 class ViewModelWeatherDetailFragment(application: Application) : AndroidViewModel(application) {
+
+    private lateinit var cityIdManagerRepository: CityIdManagerRepository
+
+    fun clearCityIdFromSharedPreference(context: Context) {
+
+        cityIdManagerRepository = CityIdManagerRepository(context)
+
+        cityIdManagerRepository.clearCityIdFromSharedPreference()
+
+    }
 
     private lateinit var loading: LoadingAnimation
 
